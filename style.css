@@ -90,7 +90,7 @@ nav .nav-links li a:hover {
   flex-direction: column;
 }
 
-.home h2 {
+.home h1 {
   font-size: 5vw;
   font-weight: 700;
   text-align: center;
@@ -512,6 +512,7 @@ nav .nav-links li a:hover {
 }
 
 .container h3 {
+  margin-bottom: 30px;
   font-size: 3rem;
   font-weight: bold; /* Optional: Makes the text bolder */
   background: linear-gradient(45deg, #012116, #949B9D); /* Diagonal gradient */
@@ -521,38 +522,201 @@ nav .nav-links li a:hover {
   text-align: center; /* Centers the text horizontally */
 }
 
+/* Services Section */
+.services-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  justify-content: center;
+}
+
 .service-item {
-  background: #f4f4f4;
-  padding: 20px;
+  background: #e8e8e8;
+  padding: 25px;
   border-radius: 10px;
   flex: 1 1 calc(33.33% - 20px); /* Ensures 3 items per row, accounting for gap */
   max-width: 300px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  position: relative;
-  z-index: 1;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  perspective: 1000px; /* Added perspective for 3D effect */
 }
 
-/* Behind hover effect with color change */
-.service-item::before {
-  content: '';
+.service-card {
+  position: relative;
+  width: 100%;
+  height: 200px; /* Set a fixed height for the card */
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+}
+
+.service-item:hover .service-card {
+  transform: rotateY(180deg); /* Flip the card on hover */
+}
+
+.service-card-front, .service-card-back {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(1, 33, 22, 0.2); /* Darker background on hover */
+  backface-visibility: hidden; /* Hide the back when flipped */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.service-card-front h4 {
+  font-size: 2rem;
+  font-weight: bold; /* Optional: Makes the text bolder */
+  background: linear-gradient(45deg, #012116, #949B9D); /* Diagonal gradient */
+  -webkit-background-clip: text; /* For Chrome/Safari */
+  background-clip: text;
+  color: transparent; /* This is necessary for the background clip effect to work */
+}
+
+
+.service-card-front {
+  background: #e8e8e8;
+  padding: 20px;
+}
+
+.service-card-back {
+  background: #e8e8e8;
+  padding: 20px;
+  transform: rotateY(180deg); /* Initially rotate the back */
+}
+
+.service-card-front h3 {
+  margin: 0;
+  color: #333;
+}
+
+.service-card-back p {
+  color: #555;
+  text-align: center;
+}
+
+
+.projects-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.project-item {
+  background: #e8e8e8;
+  padding: 20px;
+  border: 1px solid #ddd;
   border-radius: 10px;
-  z-index: -1; /* Ensure it stays behind the content */
-  transition: all 0.3s ease;
+  flex: 1 1 calc(33.33% - 20px); /* Ensures 3 items per row, accounting for gap */
+  max-width: 300px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.service-item:hover {
-  transform: scale(1.05); /* Increases size of the item */
+.project-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-.service-item:hover::before {
-  transform: scale(1.05); /* Expands the background */
+.project-item img.project-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.project-item h4 {
+  margin-bottom: 10px;
+  background: linear-gradient(45deg, #012116, #949B9D); /* Diagonal gradient */
+  -webkit-background-clip: text; /* For Chrome/Safari */
+  background-clip: text; /* For other browsers */
+  color: transparent;
+}
+
+.project-item p {
+  color: #555;
+  margin-bottom: 15px;
+}
+
+.project-item a {
+  color: #333; /* Default color for the link */
+  font-size:30px;/* Adjust the size of the icon */
+  text-decoration: none; /* Remove the underline */
+  transition: color 0.3s ease, transform 0.3s ease; /* Smooth transition for hover effects */
+}
+
+.project-item a:hover {
+  transform: scale(1.1); /* Slightly enlarge the icon on hover */
+}
+
+.project-item a i {
+  display: inline-block; /* Ensure the icon is aligned properly */
+  transition: transform 0.3s ease; /* Smooth transition for icon scale */
+}
+
+.project-item a:hover i {
+  transform: scale(1.2);
+  background: linear-gradient(#012116, #949B9D); /* Gradient colors */
+  -webkit-background-clip: text; /* Required for Chrome and Safari */
+  background-clip: text; /* For other browsers */
+  color: transparent; 
 }
 
 
+/* Contact Section */
+form {
+  display: grid;
+  gap: 15px;
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #012116;
+  border-radius: 5px;
+}
+
+/* Add focus styles for input fields */
+.form-group input:focus {
+  border-color: #00bcd4; /* Change the border color to match button on focus */
+  outline: none; /* Remove the default outline */
+}
+
+/* Change the placeholder text color */
+.form-group input::placeholder {
+  color: #888; /* Lighter gray placeholder */
+}
+
+
+button {
+  padding: 10px 20px;
+  background: linear-gradient(45deg, #012116, #949B9D); /* Gradient from #00bcd4 to #008ba3 at a 45-degree angle */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: linear-gradient(85deg, #012116, #949B9D); /* Reverse the gradient on hover */
+}
+
+/* Footer */
+footer {
+  background: linear-gradient(145deg, #012116, #949B9D); /* Reverse the gradient on hover */
+  color: #fff;
+  padding: 10px 0;
+  text-align: center;
+}

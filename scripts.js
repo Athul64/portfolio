@@ -5,7 +5,7 @@ window.addEventListener('load', () => {
     setTimeout(() => {
       loader.classList.add('hidden'); // Hides the loader
       mainContent.classList.remove('hidden'); // Shows the main content
-    }, 3000); // Adjust duration as needed
+    }, 2000); // Adjust duration as needed
   });
   ;
 
@@ -32,5 +32,38 @@ window.addEventListener('scroll', function() {
     }
 });
 
+
+
+// Initialize EmailJS
+(function () {
+  emailjs.init("athulsylesh23@gmail.com"); // Replace with your EmailJS user ID
+})();
+
+// Get the form element
+const form = document.getElementById('contact-form');
+
+// Form submission handler
+form.addEventListener('submit', function(event) {
+  event.preventDefault(); // Prevent the default form submission
+
+  const name = document.getElementById('name').value;
+  const email = document.getElementById('email').value;
+  const message = document.getElementById('message').value;
+
+  // Send email via EmailJS
+  emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+      from_name: name,
+      from_email: email,
+      message: message
+  })
+  .then(function(response) {
+      console.log("Success", response);
+      alert('Your message has been sent!');
+      form.reset(); // Reset the form after submission
+  }, function(error) {
+      console.log("Error", error);
+      alert('Something went wrong. Please try again.');
+  });
+});
 
 
