@@ -34,6 +34,9 @@ window.addEventListener('scroll', function() {
 
 
 
+
+
+
 // Initialize EmailJS
 (function () {
   emailjs.init("athulsylesh23@gmail.com"); // Replace with your EmailJS user ID

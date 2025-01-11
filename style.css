@@ -69,15 +69,34 @@ nav .nav-links {
   gap: 20px;
 }
 
-nav .nav-links li a {
+nav .nav-links li a{
+  position: relative; /* Required for positioning the pseudo-element */
   color: #012116;
   text-decoration: none;
-  transition: color 0.3s ease;
+  font-size: 18px;
+  font-weight: 500;
+  transition: color 0.3s ease-in-out;
 }
 
-nav .nav-links li a:hover {
-  color: #00bcd4;
+nav .nav-links li a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -10px; /* Adjust this value to increase/decrease the space */
+  width: 0;
+  height: 2px; /* Height of the underline */
+  background-color: #012116; /* Underline color */
+  transition: width 0.3s ease-in-out;
 }
+nav .nav-links li a:hover{
+  color: #012116;
+}
+
+nav .nav-links li a:hover::after {
+  width: 100%; /* Expand the underline to full width on hover */
+  color: #012116;
+}
+
 
 /* home section */
 .home {
@@ -611,6 +630,7 @@ nav .nav-links li a:hover {
   flex: 1 1 calc(33.33% - 20px); /* Ensures 3 items per row, accounting for gap */
   max-width: 300px;
   text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -720,3 +740,5 @@ footer {
   padding: 10px 0;
   text-align: center;
 }
+
+
