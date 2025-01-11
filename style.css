@@ -98,6 +98,7 @@ nav .nav-links li a:hover::after {
 }
 
 
+
 /* home section */
 .home {
   background-color:#e8e8e8;
@@ -741,4 +742,111 @@ footer {
   text-align: center;
 }
 
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+  background: none;
+  border: none;
+}
 
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  transition: 0.3s;
+}
+
+.hamburger span:nth-child(1) {
+  background: #012116;
+  width: 30px;
+}
+
+.hamburger span:nth-child(2) {
+  background: #012116;
+  width: 20px;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 1px);
+  width: 20px;
+}
+
+.hamburger.active span:nth-child(2) {
+  transform: rotate(-45deg) translate(5px, -1px);
+}
+
+/* Show hamburger menu for small screens */
+@media (max-width: 767px) {
+  .hamburger {
+      display: flex;
+  }
+
+ nav .nav-links {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      background-color: #e8e8e8;
+      position: absolute;
+      top: 60px;
+      right: 0;
+      width: 100%;
+      padding: 10px 0;
+  }
+
+  nav .nav-links.active {
+      display: flex;
+  }
+
+  nav .nav-links li {
+      margin: 10px 0;
+  }
+
+   nav.nav-links li a {
+      position: relative;
+      text-decoration: none;
+      color: #333;
+      font-size: 18px;
+      font-weight: 500;
+      transition: color 0.3s ease-in-out;
+  }
+
+  .nav-links li a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 0;
+      height: 2px;
+      background-color: #012116;
+      transition: width 0.3s ease-in-out;
+  }
+
+  .nav-links li a:hover::after {
+      width: 100%;
+  }
+}
+/* Media Queries for Devices */
+@media (max-width: 767px) {
+  .service-item, .project-item {
+      flex: 1 1 100%; /* Full width for small screens */
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .service-item, .project-item {
+      flex: 1 1 calc(50% - 20px); /* Two per row for tablets */
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .service-item, .project-item {
+      flex: 1 1 calc(33.33% - 20px); /* Three per row for laptops */
+  }
+}
+
+@media (min-width: 1440px) {
+  .service-item, .project-item {
+      flex: 1 1 calc(25% - 20px); /* Four per row for desktops */
+  }
+}
