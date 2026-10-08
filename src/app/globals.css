@@ -1,0 +1,372 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-moss: #2E4036;
+  --color-clay: #CC5833;
+  --color-cream: #F2F0E9;
+  --color-charcoal: #1A1A1A;
+
+  --color-background: #F2F0E9;
+  --color-foreground: #1A1A1A;
+  
+  --font-jakarta: var(--font-jakarta);
+  --font-outfit: var(--font-outfit);
+  --font-cormorant: var(--font-cormorant);
+  --font-mono: var(--font-mono);
+
+  --radius-pill: 9999px;
+  --radius-card: 2rem;
+}
+
+:root {
+  --moss: #2E4036;
+  --clay: #CC5833;
+  --cream: #F2F0E9;
+  --charcoal: #1A1A1A;
+  --radius-pill: 9999px;
+  --radius-card: 2rem;
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+/* Base resets & typography */
+html {
+  scroll-behavior: smooth;
+  background-color: #121513;
+  color: var(--charcoal);
+}
+
+body {
+  font-family: var(--font-outfit), sans-serif;
+  color: var(--charcoal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Subtle organic grain overlay */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.028;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #121513;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(46, 64, 54, 0.6);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2E4036;
+}
+
+/* 4-family Typography System Helper Classes */
+.font-heading {
+  font-family: var(--font-jakarta), sans-serif;
+  letter-spacing: -0.02em;
+}
+
+.font-body {
+  font-family: var(--font-outfit), sans-serif;
+}
+
+.font-drama {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-style: italic;
+  letter-spacing: -0.01em;
+}
+
+.font-mono {
+  font-family: var(--font-mono), monospace;
+  letter-spacing: -0.015em;
+}
+
+/* Motion: Magnetic Buttons */
+.btn-magnetic {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-pill);
+  transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.28s ease;
+  z-index: 1;
+}
+
+.btn-magnetic:hover {
+  transform: scale(1.03);
+}
+
+.btn-magnetic::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: var(--magnetic-fill, rgba(204, 88, 51, 0.95));
+  transform: translateY(100%);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: -1;
+  border-radius: inherit;
+}
+
+.btn-magnetic:hover::before {
+  transform: translateY(0);
+}
+
+.btn-magnetic-moss::before {
+  background-color: var(--moss);
+}
+
+.btn-magnetic-clay::before {
+  background-color: var(--clay);
+}
+
+.btn-magnetic-cream::before {
+  background-color: var(--cream);
+}
+
+/* Motion: Hover Lift */
+.hover-lift {
+  transition: transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.22s ease, border-color 0.22s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-1px);
+}
+
+/* Radius constraints */
+.rounded-card {
+  border-radius: var(--radius-card);
+}
+
+.rounded-pill {
+  border-radius: var(--radius-pill);
+}
+
+/* Glass and Frosted Surfaces using rgba() opacity variants */
+.glass-cream {
+  background: rgba(242, 240, 233, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(46, 64, 54, 0.12);
+}
+
+.glass-dark {
+  background: rgba(26, 26, 26, 0.78);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(242, 240, 233, 0.12);
+}
+
+.glass-moss {
+  background: rgba(46, 64, 54, 0.65);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(242, 240, 233, 0.15);
+}
+
+.glass-clay {
+  background: rgba(204, 88, 51, 0.12);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(204, 88, 51, 0.28);
+}
+
+/* 4 Custom CSS SVG Animations on the Timeline Section */
+
+/* 1. Geometric SVG Animation */
+@keyframes spinClockwise {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spinCounterClockwise {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes pulseGeometricNode {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 1;
+  }
+}
+
+.animate-spin-clockwise {
+  transform-origin: center;
+  animation: spinClockwise 22s linear infinite;
+}
+
+.animate-spin-counter {
+  transform-origin: center;
+  animation: spinCounterClockwise 16s linear infinite;
+}
+
+.animate-node-pulse {
+  transform-origin: center;
+  animation: pulseGeometricNode 3s ease-in-out infinite;
+}
+
+/* 2. Scanner SVG Animation */
+@keyframes scanLaser {
+  0% {
+    transform: translateY(-80px);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(80px);
+    opacity: 0;
+  }
+}
+
+@keyframes scannerGridFlicker {
+  0%, 100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.animate-scan-line {
+  animation: scanLaser 3.2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-grid-flicker {
+  animation: scannerGridFlicker 4s ease-in-out infinite;
+}
+
+/* 3. Waveform SVG Animation */
+@keyframes waveBarA {
+  0%, 100% {
+    transform: scaleY(0.25);
+  }
+  50% {
+    transform: scaleY(0.95);
+  }
+}
+
+@keyframes waveBarB {
+  0%, 100% {
+    transform: scaleY(0.85);
+  }
+  50% {
+    transform: scaleY(0.35);
+  }
+}
+
+@keyframes waveBarC {
+  0%, 100% {
+    transform: scaleY(0.4);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes waveBarD {
+  0%, 100% {
+    transform: scaleY(0.9);
+  }
+  50% {
+    transform: scaleY(0.2);
+  }
+}
+
+@keyframes waveformDash {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -120;
+  }
+}
+
+.animate-wave-bar-1 {
+  transform-origin: bottom;
+  animation: waveBarA 1.8s ease-in-out infinite;
+}
+
+.animate-wave-bar-2 {
+  transform-origin: bottom;
+  animation: waveBarB 1.5s ease-in-out infinite 0.2s;
+}
+
+.animate-wave-bar-3 {
+  transform-origin: bottom;
+  animation: waveBarC 2.1s ease-in-out infinite 0.4s;
+}
+
+.animate-wave-bar-4 {
+  transform-origin: bottom;
+  animation: waveBarD 1.7s ease-in-out infinite 0.1s;
+}
+
+.animate-wave-path {
+  stroke-dasharray: 8 6;
+  animation: waveformDash 6s linear infinite;
+}
+
+/* 4. Radar SVG Animation */
+@keyframes radarRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes radarPingWave {
+  0% {
+    r: 6px;
+    opacity: 0.95;
+    stroke-width: 2px;
+  }
+  100% {
+    r: 44px;
+    opacity: 0;
+    stroke-width: 0.5px;
+  }
+}
+
+.animate-radar-sweep {
+  transform-origin: center;
+  animation: radarRotate 4.5s linear infinite;
+}
+
+.animate-radar-ping {
+  transform-origin: center;
+  animation: radarPingWave 2.8s cubic-bezier(0.2, 0.8, 0.4, 1) infinite;
+}
